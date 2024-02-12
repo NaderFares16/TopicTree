@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+def index(request):
+  # TOPIC TREE INDEX PAGE
+  return render(request, 'topic_trees/index.html')
