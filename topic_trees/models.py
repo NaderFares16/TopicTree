@@ -6,5 +6,18 @@ class Topic(models.Model):
   date_added = models.DateTimeField(auto_now_add=True)
 
   def __str__(self):
-    # RETORN STRING DO MODELO
+    # RETORNA STRING DO MODELO
     return self.text
+  
+class Entry(models.Model):
+  # NOTA DO APRENDIZADO
+  topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
+  text = models.TextField()
+  date_added = models.DateTimeField(auto_now_add=True)
+
+  class Meta:
+    verbose_name_plural = 'entries'
+
+  def __str__(self):
+    # RETORNA STRING DO MODELO
+    return self.text[:50] + '...'
