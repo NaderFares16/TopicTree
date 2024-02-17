@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .models import Topic
+from .forms import TopicForm
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 def index(request):
   # TOPIC TREE INDEX PAGE
@@ -21,3 +24,17 @@ def topic(request, topic_id):
     'entries': entries
   }
   return render(request, 'topic_trees/topic.html', context)
+
+def new_topic(request):
+  if request.method != 'POST':
+    # EMPTY FORM
+    form = TopicForm()
+  else:
+    # SUBMIT POST DATA
+    form = TopicForm(request.POST)
+    if form.is_valid():
+      form.save()
+      return HttpResponseRedirect(reverse('topics'))
+
+  context = {'form': form}
+  return render(request, 'topic_trees/new_topic.html', context)
