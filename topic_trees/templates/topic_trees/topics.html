@@ -1,12 +1,14 @@
 {% extends "topic_trees/base.html" %}
 
 {% block content %}
+  <br>
+  <br>
   Topics:
 
   <ul>
     {% for topic in topics  %}
       <li>
-        {{ topic }}
+        <a href="{% url 'topic' topic.id %}">{{ topic }}</a>
       </li>
     {% empty %}
       <li>No Topics Added</li>
