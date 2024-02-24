@@ -1,4 +1,11 @@
-<a href="{% url 'index' %}">TopicTree</a> -
-<a href="{% url 'topics' %}">Topics</a>
+<p>
+  <a href="{% url 'index' %}">TopicTree</a> -
+  <a href="{% url 'topics' %}">Topics</a>
+  {% if user.is_authenticated %}
+    Hey, {{ user.username }}
+  {% else %}
+    <a href="{% url 'login' %}">Login</a>
+  {% endif %}
+</p>
 
 {% block content %}{% endblock content %}
