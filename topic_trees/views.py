@@ -3,11 +3,13 @@ from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 def index(request):
   # TOPIC TREE INDEX PAGE
   return render(request, 'topic_trees/index.html')
 
+@login_required
 def topics(request):
   # USER TOPICS PAGE
   topics = Topic.objects.order_by('date_added')
@@ -16,6 +18,7 @@ def topics(request):
   }
   return render(request, 'topic_trees/topics.html', context)
 
+@login_required
 def topic(request, topic_id):
   topic = Topic.objects.get(id = topic_id)
   entries = topic.entry_set.order_by('-date_added')
@@ -25,6 +28,7 @@ def topic(request, topic_id):
   }
   return render(request, 'topic_trees/topic.html', context)
 
+@login_required
 def new_topic(request):
   if request.method != 'POST':
     # EMPTY FORM
@@ -39,6 +43,7 @@ def new_topic(request):
   context = {'form': form}
   return render(request, 'topic_trees/new_topic.html', context)
 
+@login_required
 def new_entry(request, topic_id):
   # ADD NEW ENTRY TO TOPIC
   topic =  Topic.objects.get(id = topic_id)
@@ -63,6 +68,7 @@ def new_entry(request, topic_id):
   }
   return render(request, 'topic_trees/new_entry.html', context)
 
+@login_required
 def edit_entry(request, entry_id):
   # EDIT AN EXISTING ENTRY
   entry = Entry.objects.get(id = entry_id)

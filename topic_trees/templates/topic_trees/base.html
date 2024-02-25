@@ -1,12 +1,12 @@
 <p>
   <a href="{% url 'index' %}">TopicTree</a> -
-  <a href="{% url 'topics' %}">Topics</a>
+  <a href="{% url 'topics' %}">Topics</a> |
   {% if user.is_authenticated %}
     Hey, {{ user.username }}
     <a href="{% url 'logout' %}">Logout</a>
   {% else %}
-    <a href="{% url 'register' %}">Sign Up</a>
-    <a href="{% url 'login' %}">Sign In</a>
+  <a href="{% url 'login' %}">Login</a> -
+    <a href="{% url 'register' %}">Register</a>
   {% endif %}
 </p>
 
