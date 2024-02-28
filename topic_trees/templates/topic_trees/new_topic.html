@@ -2,7 +2,12 @@
 {% load bootstrap3 %}
 
 {% block header %}
-  <h2>Create Topic:</h2>
+  <h2>
+    <a href="{% url 'topics' %}" type="button" class="btn btn-default" aria-label="Left Align">
+      <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
+    </a>
+    Create Topic:
+  </h2>
 {% endblock header %}
 
 {% block content %}

@@ -1,12 +1,17 @@
 {% extends "topic_trees/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h2>Register</h2>
+{% endblock header %}
 
 {% block content %}
 
-  <form action="{% url 'register' %}" method="post">
+  <form class="form" action="{% url 'register' %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% bootstrap_form form %}
 
-    <button name="submit">Register</button>
+    <button class="btn btn-primary" name="submit">Register</button>
     <input type="hidden" name="next" value="{% url 'index' %}" />
   </form>
 
