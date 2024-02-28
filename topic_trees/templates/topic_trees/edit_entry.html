@@ -1,15 +1,20 @@
 {% extends "topic_trees/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h2>Edit Note:</h2>
+{% endblock header %}
 
 {% block content %}
 
-  <p><a href="{% url 'topic' topic.id %}">{{ topic }}</a></p>
+  <h4><a href="{% url 'topic' topic.id %}">{{ topic }}</a></h4>
 
   <p>Edit Note</p>
 
-  <form action="{% url 'edit_entry' entry.id %}" method="post">
+  <form class="form" action="{% url 'edit_entry' entry.id %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button name="submit">Save</button>
+    {% bootstrap_form form %}
+    <button class="btn btn-primary" name="submit">Save</button>
   </form>
 
 {% endblock content %}

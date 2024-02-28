@@ -12,6 +12,9 @@ def logout_view(request):
 
 def register(request):
   # CREATE A NEW USER
+  if request.user.is_authenticated:
+    return HttpResponseRedirect(reverse('index'))
+
   if request.method != 'POST':
     # SHOW BLANK FORM
     form = UserCreationForm()

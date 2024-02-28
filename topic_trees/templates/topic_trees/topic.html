@@ -1,31 +1,39 @@
 {% extends "topic_trees/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+  <h2>
+    <a href="{% url 'topics' %}" type="button" class="btn btn-default" aria-label="Left Align">
+      <span class="glyphicon glyphicon-triangle-left" aria-hidden="true"></span>
+    </a>
+    {{ topic }}
+  </h2>
+{% endblock header %}
 
 {% block content %}
-
-  <p>Topic: {{ topic }}</p>
-
-  <p>Notes: </p>
-
   <p>
-    <a href="{% url 'new_entry' topic.id %}">New Note</a>
+    <a class="btn btn-primary" href="{% url 'new_entry' topic.id %}">New Note</a>
   </p>
+  <br>
 
-  <ul>
+  <ul class="list-group">
     {% for entry in entries %}
     
-      <li>
+      <li class="list-group-item">
         <p>{{ entry.date_added | date:'M d, Y H:i' }}</p>
         <p>{{ entry.text | linebreaks }}</p>
         <p>
-          <a href="{% url 'edit_entry' entry.id %}">Edit Note</a>
+          <a class="btn btn-default" href="{% url 'edit_entry' entry.id %}">Edit Note</a>
         </p>
       </li>
 
       {% empty %}
-
-      <li>
-        No Registry.
-      </li>
+      <br>
+      <ul class="list-group">
+        <li class="list-group-item">
+          No Registry.
+        </li>
+      </ul>
 
     {% endfor %}
   </ul>
