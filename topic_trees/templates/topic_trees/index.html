@@ -1,5 +1,15 @@
 {% extends "topic_trees/base.html" %}
 
+{% block header %}
+  <div class="jumbotron">
+    <h1>Track your learning.</h1>
+  </div>
+{% endblock header %}
+
 {% block content %}
-  <p>This application can organize your topics and save your learning notes.</p>
+  {% if user.is_authenticated %}
+    <h3>View your <a href="{% url 'topics' %}">saved topics</a> in your account.</h3>
+  {% else %}
+    <h3><a href="{% url 'register' %}">Create an account</a> to keep your notes saved in TopicTree.</h3>
+  {% endif %}
 {% endblock content %}
